@@ -1,7 +1,7 @@
 name: CI Windows
 
 # Trigger this workflow on push or pull request
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
@@ -48,7 +48,7 @@ jobs:
         cp _RELEASE/*.dll build/test
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: OpenHexagon-Windows
         path: _RELEASE
