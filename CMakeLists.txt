@@ -577,6 +577,40 @@ if(NOT SSVOH_ANDROID)
     )
 endif()
 
+# Add compiler flags conditionally
+include(CheckCXXCompilerFlag)
+include(CheckCCompilerFlag)
+include(CheckLinkerFlag)
+
+# Check and add -Wstrict-prototypes flag
+check_c_compiler_flag(-Wstrict-prototypes C_FLAG_WSTRICT_PROTOTYPES)
+if(C_FLAG_WSTRICT_PROTOTYPES)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wstrict-prototypes")
+endif()
+
+# Check and add -Wcast-qual flag
+check_cxx_compiler_flag(-Wcast-qual CXX_FLAG_WCAST_QUAL)
+if(CXX_FLAG_WCAST_QUAL)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wcast-qual")
+endif()
+
+# Check and add -z noexecstack linker flag
+check_linker_flag(-z noexecstack LD_FLAG_Z_NOEXECSTACK)
+if(LD_FLAG_Z_NOEXECSTACK)
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -z noexecstack")
+endif()
+
+# Check and add -Qunused-arguments flag
+check_c_compiler_flag(-Qunused-arguments C_FLAG_QUNUSED_ARGUMENTS)
+if(C_FLAG_QUNUSED_ARGUMENTS)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Qunused-arguments")
+endif()
+
+check_cxx_compiler_flag(-Qunused-arguments CXX_FLAG_QUNUSED_ARGUMENTS)
+if(CXX_FLAG_QUNUSED_ARGUMENTS)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Qunused-arguments")
+endif()
+
 #
 #
 # -----------------------------------------------------------------------------
