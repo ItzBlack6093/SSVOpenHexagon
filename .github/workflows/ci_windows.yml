@@ -1,7 +1,7 @@
 name: CI Windows
 
 # Trigger this workflow on push or pull request
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
